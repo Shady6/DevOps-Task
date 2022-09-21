@@ -9,3 +9,12 @@ content-type: application/json
     "name": "Joe",
     "age": 25
 }
+###
+
+POST http://127.0.0.1:58774/people
+content-type: application/json
+
+{
+    "name": "Joe",
+    "age": 25
+}

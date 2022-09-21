@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: docker.io/library/{{ .Values.docker.image.name }}:{{ .Values.docker.image.version }}
+        imagePullPolicy: Never
+        ports:
+        - containerPort:  {{ .Values.deployment.container.port }}
+        {{- if .Values.resources }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        env:
+        - name: DB_CONNECTION
+          value: "sqlite::memory"
