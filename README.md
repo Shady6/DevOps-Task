@@ -21,7 +21,9 @@ Your goal is to create pipeline which will test, build and deploy the app to k8s
 
 - Create yaml for the backend application - deployment and a service. It should have 1 replica and use
   docker image from the previous step. The app uses `DB_CONNECTION` env
-  variable so you can place it here aswell. The Node app is listening on port 4000.
+  variable so you can place it here aswell. This connection string should point to the
+  database service which is described in the next step (it shouldn't be in memory database which is used locally).
+  The Node app is listening on port 4000.
 
 - Create yaml for the database - deployment and a service. It should have 1 replica. For the image use
   Postgres:12. Postgres by default will be listening on port 5432.
